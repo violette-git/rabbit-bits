@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rabbit Bits</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #F5F5F5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #navbarContent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            padding: 0 10px;
+        }
+
+        #brandName {
+            margin-right: 20px;
+        }
+
+        #searchBar {
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        #mainContent {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .bitBox {
+            width: 50vw;
+            margin: 10px 0;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: white;
+            color: black;
+            resize: vertical;
+            overflow: auto;
+            min-height: 15px;
+        }
+
+        .buttonGroup {
+            display: flex;
+            justify-content: space-around;
+            margin: 5px 0;
+        }
+
+        .bitButton {
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav style="background-color: #ff3801; height: 50px;">
+        <div id="navbarContent">
+            <span id="brandName">Rabbit Bits</span>
+            <!-- Other navigation items can be added here -->
+            <input type="text" id="searchBar" placeholder="Search">
+        </div>
+    </nav>
+
+    <div id="mainContent">
+        <button id="addBit">Add Bit</button>
+        <!-- Editable boxes will be added here -->
+    </div>
+
+    <script>
+        document.getElementById('addBit').addEventListener('click', function() {
+            let mainContent = document.getElementById('mainContent');
+            let bitBox = document.createElement('div');
+            bitBox.contentEditable = 'true';
+            bitBox.classList.add('bitBox');
+            bitBox.addEventListener('focus', function() {
+                this.style.height = 'auto';
+            });
+            bitBox.addEventListener('blur', function() {
+                if (this.textContent.trim() === '') {
+                    this.style.height = '15px';
+                }
+            });
+
+            let buttonGroup = document.createElement('div');
+            buttonGroup.classList.add('buttonGroup');
+            
+            let confirmButton = document.createElement('button');
+            confirmButton.textContent = 'Confirmed';
+            confirmButton.classList.add('bitButton');
+            // Add event listener for confirmed button here if needed
+            
+            let cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancelled';
+            cancelButton.classList.add('bitButton');
+            // Add event listener for cancelled button here if needed
+
+            buttonGroup.appendChild(confirmButton);
+            buttonGroup.appendChild(cancelButton);
+
+            mainContent.appendChild(bitBox);
+            mainContent.appendChild(buttonGroup);
+        });
+    </script>
+</body>
+</html>
